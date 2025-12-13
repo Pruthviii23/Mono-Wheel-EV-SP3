@@ -99,7 +99,7 @@ This project is ongoing, designed and built entirely by a **team of four AI/ML e
 ### **Motor Controller**
 
 * Local controller rated **1000W**, supports 60/72/84V
-* Throttle interface via **PWM**
+* Throttle interface via **DAC Module**
 * No CAN/UART telemetry (yet)
 
 📁 **Placeholder:** ``
@@ -153,16 +153,13 @@ This project is ongoing, designed and built entirely by a **team of four AI/ML e
 * IMU + Arduino basic balancing tests done
 * Early control tests successful
 * Began welding and main structure assembly
-
-📁 **Placeholder:** ``
-
-### 🔨 In Progress
-
 * Final chassis welding
 * Electronics bay design
 * Control tuning
 * CAD refinements
 * Wiring harness
+
+📁 **Placeholder:** ``
 
 ### 🚧 Upcoming
 
@@ -222,6 +219,8 @@ SP3 is proudly built by a team of **4 engineering students**, each contributing 
 * Arduino Uno R3
 * Raspberry Pi 3
 * MPU6500 IMU
+* 12v-5v Buck converter
+* MCP4725 DAC Module
 
 **Software Tools**
 
