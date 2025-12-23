@@ -102,8 +102,7 @@ This project is ongoing, designed and built entirely by a **team of four AI/ML e
 * Throttle interface via **DAC Module**
 * No CAN/UART telemetry (yet)
 
-📁 **Placeholder:** ``
-📁 **Placeholder:** ``
+📁 **Placeholder:** `images/electrical_image`
 
 ---
 
@@ -138,7 +137,6 @@ This project is ongoing, designed and built entirely by a **team of four AI/ML e
   * Bluetooth interface
   * Real-time telemetry logging
 
-📁 **Placeholder:** ``
 
 ---
 
@@ -159,7 +157,7 @@ This project is ongoing, designed and built entirely by a **team of four AI/ML e
 * CAD refinements
 * Wiring harness
 
-📁 **Placeholder:** ``
+📁 **Placeholder:** `images/completed_stage_1`
 
 ### 🚧 Upcoming
 
@@ -206,7 +204,6 @@ SP3 is proudly built by a team of **4 engineering students**, each contributing 
 * **PRATHEEK S Y - https://github.com/PratheekShetty007**
 * **V Pruthviraj Gowda - https://github.com/Pruthviii23**
   
-📁 **Placeholder:** ``
 
 ---
 
