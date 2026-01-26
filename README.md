@@ -1,4 +1,4 @@
-# 🚀 **SP3 — A Futuristic Mono-Wheel Electric Vehicle (Major Engineering Project)**
+# **SP3 — A Futuristic Mono-Wheel Electric Vehicle (Major Engineering Project)**
 
 *“Because the EV market was getting boring, so we decided to build something mildly insane.”*
 
@@ -6,248 +6,280 @@
 
 ## 📌 **Overview**
 
-**SP3** is a **full-scale, single-wheel electric vehicle** inspired by futuristic mobility seen in *Alita: Battle Angel*, *Ryno Motors*, and sci-fi games.
+**SP3** is a **full-scale, single-wheel electric vehicle prototype** inspired by futuristic mobility concepts seen in *Alita: Battle Angel*, *Ryno Motors*, and sci-fi games.
 
-Unlike hobby monowheels or toy Onewheel boards, SP3 aims to be a **true everyday commuter EV**, built around:
+Unlike hobby monowheels or toy Onewheel boards, SP3 is being built as a **serious engineering exploration** into what it takes to design, fabricate, wire, and control a **high-power mono-wheel EV from scratch**.
 
-* A 2000W 17-inch hub motor
-* A custom-built 72V Li-ion battery pack
-* Self-balancing control using IMU-based PID
-* A stainless-steel chassis built from the ground up
+This project is **not a kit build**.
+Every subsystem — mechanical, electrical, battery, and control — is being designed, tested, broken, and rebuilt by hand.
 
-This project is ongoing, designed and built entirely by a **team of four AI/ML engineering students** who decided to touch grass and build actual hardware.
+SP3 is developed entirely by a **team of four AI/ML engineering students** who decided that theory alone wasn’t enough — and chose sparks, smoke, and stress instead.
 
 ---
 
-# 🎯 **Project Goals**
+## 🎯 **Project Goals**
 
-* Build a **unique EV platform** that stands out in the crowded Indian EV landscape
-* Learn & apply **mechanical, electrical, embedded, and control systems engineering**
-* Create a realistic, commute-ready monowheel EV
-* Push ourselves *way* outside our comfort zone
-* Suffer, learn, suffer again, and eventually build something awesome
+* Design and build a **unique mono-wheel EV platform**
+* Learn **real-world mechanical fabrication** (welding, chassis design)
+* Design and assemble a **high-voltage Li-ion battery pack**
+* Understand **BLDC motor control and EV electronics**
+* Implement **IMU-based control logic**
+* Bridge the gap between **AI/ML coursework and physical systems**
+* Document everything honestly — mistakes included
 
----
-
-# 🛠 **Key Features**
-
-* **2000W BLDC hub motor** with 100/80–17 tyre
-* **72V 20s5p Li-ion battery pack** (custom welded & BMS-managed)
-* **Self-balancing control** using MPU6500 IMU
-* **PID-based tilt control**
-* **Arduino + Raspberry Pi control stack**
-* Stainless-steel chassis (1-inch tubing)
-* Future IP65-rated battery and electronics enclosure
-* Planned full digital instrument cluster
-* Bluetooth support (planned)
+This project prioritizes **learning and engineering depth** over polish.
 
 ---
 
-# 🧠 **System Architecture**
+## 🛠 **Key Features (Current & Planned)**
+
+### ✅ Implemented / Tested
+
+* **2000W BLDC hub motor** (17-inch)
+* **72V (20s5p) custom Li-ion battery pack**
+* **DAC-based throttle control** (true analog voltage)
+* **IMU-based tilt input (MPU6500)**
+* Arduino-based control logic
+* High-power EV wiring and testing
+* Stainless-steel chassis fabrication (MIG welded)
+
+### 🚧 In Progress / Planned
+
+* True **self-balancing (PID torque control)**
+* Controller upgrade (VESC-class)
+* Raspberry Pi-based UI & telemetry
+* Digital instrument cluster
+* Bluetooth diagnostics
+* Water-resistant electronics enclosure
+* Improved safety systems (tilt-cutoff, redundancy)
+
+---
+
+## 🧠 **System Architecture (Current Stage)**
 
 ```
            ┌──────────────────┐
-           │     IMU (MPU6500)│
+           │   IMU (MPU6500)  │
            └───────┬──────────┘
-                   │  Tilt Data
+                   │  Tilt / Accel data
                    ▼
-            ┌───────────────┐
-            │   Arduino R3  │  PID Loop @ ~200Hz
-            └───────┬───────┘
-                    │ PWM Signal
+            ┌────────────────┐
+            │  Arduino UNO   │
+            │  (Logic +     │
+            │  filtering)   │
+            └───────┬────────┘
+                    │  Analog Voltage
+                    │  (via DAC)
                     ▼
            ┌──────────────────────┐
-           │ Motor Controller     │ 60V/72V/84V
+           │  Motor Controller    │
+           │  (Speed-based)       │
            └───────┬──────────────┘
-                   │ 3-Phase Output
+                   │  3-Phase Output
                    ▼
            ┌───────────────────┐
            │  2000W Hub Motor  │
            └───────────────────┘
 ```
 
-*Raspberry Pi 3 planned for future features (UI, telemetry, OTA updates, cluster).*
+> ⚠️ **Important:**
+> At the current stage, SP3 uses **speed-based control**, not torque-based balancing.
+> This means it is **tilt-controlled**, not self-balancing (yet).
 
 ---
 
-# ⚙️ **Mechanical Design**
+## ⚙️ **Mechanical Design**
 
 * **Wheel:** 17-inch 2000W BLDC hub motor
-* **Tyre:** 100/80–17
-* **Chassis Material:** 1-inch stainless steel
+* **Tyre:** 100/80-17
+* **Chassis Material:** 1-inch stainless-steel tubing
 * **Fabrication:** MIG welding
-* **Suspension:** Not yet (future addition)
-* **Estimated Vehicle Weight:** ~200 kg
-* **CAD:** Designed fully in Tinkercad & Fusion360
+* **Suspension:** Not implemented (future work)
+* **Estimated Total Mass:** ~200 kg (vehicle + rider)
+* **CAD Tools:** Fusion360, Tinkercad
 
-📁 **Placeholder:** `images/mechanical-render.png`
+The chassis was designed with:
+
+* Battery centralization
+* Low CG
+* Structural rigidity
+* Future enclosure mounting points
+
+📁 *Placeholder:* `images/mechanical_render.png`
 
 ---
 
-# 🔋 **Electrical System**
+## 🔋 **Electrical System**
 
-### **Battery Pack**
+### 🔋 Battery Pack
 
 * **Configuration:** 20s5p
-* **Voltage:** 72V nominal, 84V peak
-* **Chemistry:** Li-ion (local 3.7V 2800mAh cells)
-* **Capacity:** ~1000 Wh
+* **Nominal Voltage:** 72V
+* **Max Voltage:** 84V
+* **Chemistry:** Li-ion (3.7V, ~2800 mAh cells)
+* **Energy:** ~1000 Wh
 * **BMS:** 20s standard BMS
-* **Charger:** 84V 15A
-* **Enclosure:** Planned IP65 sealed box with locking lid
+* **Charging:** 84V charger
+* **Construction:** Custom spot-welded nickel strips
+* **Enclosure:** Planned IP65 sealed box
 
-### **Motor Controller**
-
-* Local controller rated **1000W**, supports 60/72/84V
-* Throttle interface via **DAC Module**
-* No CAN/UART telemetry (yet)
-
-📁 **Placeholder:** `images/electrical_image`
-
----
-
-# 🧩 **Control System**
-
-### **Sensors**
-
-* **MPU6500 gyro/accelerometer**
-
-### **Algorithms**
-
-* **PID** for tilt stabilization
-* **Complementary filter** planned
-* **Kalman filter** (future upgrade)
-
-### **Safety Controls**
-
-* Auto-shutoff if tilt angle exceeds safe range
-* Planned emergency kill switch
-* Planned tilt-back safety (like Onewheel)
-* Planned over-temp monitoring
+> Battery design and testing were done manually, including:
+>
+> * Cell matching
+> * BMS validation
+> * Load testing
+> * Safety checks
 
 ---
 
-# 📦 **Software**
+### ⚡ Motor Controller
+
+* Local EV controller
+* Rated **~1000W (tested beyond rating)**
+* Supports **60V / 72V / 84V**
+* **Analog throttle input**
+* Built-in reverse support
+* No UART / CAN telemetry
+
+⚠️ This controller **cannot perform torque control** or balancing.
+
+---
+
+## 🧩 **Control System**
+
+### Sensors
+
+* **MPU6500** (6-axis IMU)
+
+### Control Strategy (Current)
+
+* Tilt-based input
+* Complementary / low-pass filtering
+* DAC-generated throttle voltage
+* Deadzones, speed limits, safety caps
+
+### Control Strategy (Planned)
+
+* Sensor fusion (Madgwick / Kalman)
+* PID-based **balance control**
+* Torque control using VESC
+* High-frequency control loops (500–1000 Hz)
+
+---
+
+## 📦 **Software Stack**
 
 * **Language:** Embedded C / Arduino
 * **IDE:** Arduino IDE
-* Planned:
+* **Control Loop Rate:** ~50–200 Hz (current)
+* **Planned Upgrade:**
 
-  * Custom Pi-based UX
-  * Bluetooth interface
-  * Real-time telemetry logging
-
-
----
-
-# 📈 **Current Progress (as of project stage)**
-
-### ✔ Completed
-
-* Purchased and tested 2000W hub motor
-* Designed full chassis + mechanical layout
-* Fabricated custom 20s5p 72V battery
-* BMS + pack testing completed
-* IMU + Arduino basic balancing tests done
-* Early control tests successful
-* Began welding and main structure assembly
-* Final chassis welding
-* Electronics bay design
-* Control tuning
-* CAD refinements
-* Wiring harness
-
-📁 **Placeholder:** `images/completed_stage_1`
-
-### 🚧 Upcoming
-
-* Full instrument cluster
-* Updated control board with Pi
-* Improved PID tuning
-* Battery monitoring system
-* Range improvement (>100 km)
-* Full body panels / fairing
-* Water-resistant housings
+  * ESP32 / STM32 / Teensy
+  * Raspberry Pi for UI & telemetry
+  * Bluetooth communication
+  * Data logging
 
 ---
 
-# 😵 **Challenges & Struggles**
+## 📈 **Project Status**
 
-A brutally honest section because engineers respect honesty:
+### ✅ Completed
 
-* Near-zero online documentation for DIY monowheels
-* No reliable sources for high-power components
-* Tuning a balancing PID while standing next to a 2000W wheel that wants to kill you
-* Balancing mechanical, electrical, and control requirements simultaneously
-* Budget constraints (student-tier pain)
-* Researching obscure tech with no mentors or guides
-* The constant feeling of *“This might blow up. Or us.”*
+* Hub motor testing
+* Battery pack fabrication & testing
+* DAC-based throttle integration
+* IMU integration & filtering
+* Tilt-controlled drive tests
+* Chassis design & welding
+* High-power wiring & debugging
+* Safety testing (many failures, many lessons)
 
-Despite all this, SP3 keeps moving forward.
+### 🚧 Ongoing / Next
+
+* Controller upgrade (VESC)
+* True self-balancing control
+* PID tuning (real balancing, not speed mapping)
+* Reverse integration (low-speed maneuvering)
+* Electronics enclosure
+* Instrument cluster
+* Weather resistance
 
 ---
 
-# 🧑‍🤝‍🧑 **Team**
+## 😵 **Challenges & Hard Lessons**
 
-SP3 is proudly built by a team of **4 engineering students**, each contributing equally across:
+Being honest, because this matters:
 
-* Mechanical design
-* Welding & fabrication
+* EV systems **do not forgive mistakes**
+* One wrong ground = smoked electronics
+* PWM ≠ true analog control (DAC fixed this)
+* Low-speed motor control is *hard*
+* Documentation for DIY monowheels is nearly nonexistent
+* PID tuning near a 2000W motor is terrifying
+* Real hardware behaves nothing like simulations
+* Debugging happens with your heart rate at 120 bpm
+
+---
+
+## 🧑‍🤝‍🧑 **Team**
+
+SP3 is built by **four AI/ML engineering students**, each working hands-on across all domains:
+
+* Mechanical design & welding
 * Battery engineering
-* Control systems
-* Electrical integration
+* Embedded systems
+* Control logic
 * Testing & documentation
-  
-**Team menbers:**
-* **KADARLA SHANMUKHA SIVA RAJA CHARI -https://github.com/yedhava**
-* **PRATHEEK B K - https://github.com/Prathikgowda33**
-* **PRATHEEK S Y - https://github.com/PratheekShetty007**
-* **V Pruthviraj Gowda - https://github.com/Pruthviii23**
-  
+
+### Team Members
+
+* **KADARLA SHANMUKHA SIVA RAJA CHARI** — [https://github.com/yedhava](https://github.com/yedhava)
+* **PRATHEEK B K** — [https://github.com/Prathikgowda33](https://github.com/Prathikgowda33)
+* **PRATHEEK S Y** — [https://github.com/PratheekShetty007](https://github.com/PratheekShetty007)
+* **V Pruthviraj Gowda** — [https://github.com/Pruthviii23](https://github.com/Pruthviii23)
 
 ---
 
-# 📚 **Tech Stack**
+## 🧰 **Tech Stack**
 
-**Hardware**
+### Hardware
 
 * 2000W BLDC hub motor
-* 20s5p custom Li-ion battery
-* Arduino Uno R3
-* Raspberry Pi 3
+* Custom 20s5p Li-ion battery
+* Arduino UNO R3
 * MPU6500 IMU
-* 12v-5v Buck converter
-* MCP4725 DAC Module
+* MCP4725 DAC
+* Buck converters (12V → 5V)
+* High-current EV controller
 
-**Software Tools**
+### Software & Tools
 
+* Arduino IDE
 * Fusion360
 * Tinkercad
-* Arduino IDE
-
-**Skills Demonstrated**
-
-* CAD design
-* Welding & fabrication
-* Battery pack design + BMS management
-* PID control
-* IMU data filtering
-* High-power EV system wiring
-* Embedded development
-* Real-world hardware testing
+* Multimeter, patience, fear
 
 ---
 
-# ⚠️ **Disclaimer**
+## ⚠️ **Disclaimer**
 
-> **“Attempt this project only if you want to be broke, frustrated, emotionally unstable, physically tired, mentally done, and spiritually empty.”**
-> But also if you want to learn more than any classroom could ever teach you.
+> **Attempt this project only if you are ready to:**
+>
+> * Lose money
+> * Blow components
+> * Learn safety the hard way
+> * Question your life choices
+> * And still keep building
+
+But also if you want to **learn more than any classroom can teach**.
 
 ---
 
-# 🙏 **Acknowledgements**
+## 🙏 **Acknowledgements**
 
-* **Ryno Motors** — for proving that single-wheeled vehicles can be real
-* Open-source EV communities
-* Every YouTuber who built dangerous things so we could learn
-* Last but not the least, our beloved LLMs. Shoutout to **ChatGPT and Gemini**, you guys were there for us when we needed you the most.
+* **Ryno Motors** — proof that mono-wheel EVs can exist
+* Open-source EV & VESC communities
+* Every YouTuber who broke things publicly
+* And yes — **LLMs** (ChatGPT, Gemini) for being the silent lab partner at 2 AM
+
+
